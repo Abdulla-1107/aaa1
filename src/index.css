@@ -1,1 +1,60 @@
 @import "tailwindcss";
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.dark-table .ant-table {
+  background-color: #1f2937 !important; /* bg-gray-800 */
+  color: white !important;
+}
+
+.dark-table .ant-table-thead > tr > th {
+  background-color: #111827 !important; /* bg-gray-900 */
+  color: #e5e7eb !important; /* text-gray-200 */
+}
+
+.dark-table .ant-table-tbody > tr > td {
+  background-color: #1f2937 !important;
+  color: #f9fafb !important;
+}
+
+.dark-table .ant-table-tbody > tr:hover > td {
+  background-color: #374151 !important; /* hover bg-gray-700 */
+}
+
+/* global.css yoki index.css ichida */
+.dark-table .ant-table {
+  background-color: #1f2937 !important; /* bg-gray-800 */
+  color: #f9fafb !important; /* text-gray-50 */
+  border-radius: 0.5rem; /* rounded-lg */
+  overflow: hidden;
+}
+
+.dark-table .ant-table-thead > tr > th {
+  background-color: #111827 !important; /* bg-gray-900 */
+  color: #d1d5db !important; /* text-gray-300 */
+  font-weight: 600; /* semibold */
+  text-align: center;
+  border-bottom: 2px solid #374151 !important; /* bg-gray-700 */
+}
+
+.dark-table .ant-table-tbody > tr > td {
+  background-color: #1f2937 !important; /* bg-gray-800 */
+  color: #f3f4f6 !important; /* text-gray-100 */
+  border-bottom: 1px solid #374151 !important;
+  text-align: center;
+  padding: 12px 8px;
+}
+
+.dark-table .ant-table-tbody > tr:hover > td {
+  background-color: #374151 !important; /* hover bg-gray-700 */
+  transition: background-color 0.2s ease-in-out;
+}
+
+.dark-table .ant-table-bordered .ant-table-cell {
+  border: 1px solid #374151 !important; /* bg-gray-700 */
+}
+

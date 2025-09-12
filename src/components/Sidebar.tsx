@@ -8,8 +8,8 @@ const Sidebar = () => {
   const links = [
     { to: "/", label: "Boshqaruv paneli", icon: <Home className="w-5 h-5" /> },
     { to: "/search", label: "Qidirish", icon: <Search className="w-5 h-5" /> },
+    { to: "/fraudster", label: "Firibgar qo'shish", icon: <ShieldAlert className="w-5 h-5" /> },
     { to: "/user", label: "Foydalanuvchilar", icon: <User className="w-5 h-5" /> },
-    { to: "/fraudster", label: "Firibgarlar", icon: <ShieldAlert className="w-5 h-5" /> },
     { to: "/profile", label: "Profil", icon: <User className="w-5 h-5" /> },
   ];
 

@@ -20,12 +20,15 @@ const App: React.FC = () => {
           path="/*"
           element={
             <ProtectedRoute>
-              <div className="flex flex-col h-screen bg-gray-950 text-white">
+              {/* butun sahifa flex qilib olindi */}
+              <div className="flex flex-col min-h-screen bg-gray-950 text-white">
                 <Navbar />
-                <div className="flex flex-1">
+
+                <div className="flex flex-1 overflow-hidden">
                   <Sidebar />
+
+                  {/* scroll faqat content qismida ishlaydi */}
                   <div className="flex-1 p-6 overflow-y-auto">
-                    {/* Route content shu yerda o‘zgaradi */}
                     <Routes>
                       <Route path="/" element={<Home />} />
                       <Route path="/search" element={<Search />} />
