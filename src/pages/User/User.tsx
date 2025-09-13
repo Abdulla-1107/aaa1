@@ -11,12 +11,6 @@ const User = () => {
 
   const columns = [
     {
-      title: "ID",
-      dataIndex: "id",
-      key: "id",
-      ellipsis: true,
-    },
-    {
       title: "Ism",
       dataIndex: "name",
       key: "name",
