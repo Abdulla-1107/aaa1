@@ -3,6 +3,7 @@ import { useFraudsters } from "../../api/service/useFraudster";
 import { useMyFraudsters } from "../../api/service/myFraudster";
 import FraudsterTable from "../../components/FraudsterTable";
 import { Spin, Alert } from "antd";
+import Container from "../../components/Container";
 
 const Home = () => {
   const { data, isLoading, error } = useFraudsters();
@@ -12,18 +13,15 @@ const Home = () => {
   if (error)
     return <Alert message="Xatolik yuz berdi!" type="error" showIcon />;
 
-  console.log(data);
-  console.log(myCount, "lj");
-
   return (
-    <div className="p-4 sm:p-6 space-y-6">
+    <Container className="py-6 space-y-6">
       {/* Sarlavha */}
-      <h2 className="text-xl sm:text-2xl font-bold text-white mb-4 sm:mb-6">
+      <h2 className="text-xl sm:text-2xl font-bold text-white">
         Boshqaruv paneli
       </h2>
 
       {/* Statistikalar */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {/* Firibgarlar soni */}
         <div className="bg-gray-900 border border-purple-400 rounded-xl p-4 sm:p-6 shadow-md">
           <div className="flex items-center justify-between">
@@ -64,19 +62,19 @@ const Home = () => {
       </div>
 
       {/* Ro‘yxat sarlavhasi */}
-      <div className="text-center my-4 sm:my-6">
+      <div className="text-center my-6">
         <p className="font-bold text-lg sm:text-xl text-white">
           Firibgarlar ro'yxati
         </p>
       </div>
 
-      {/* Jadval container */}
-      <div className="bg-gray-900 p-2 sm:p-4 rounded mt-4 sm:mt-6 overflow-x-auto">
+      {/* Jadval */}
+      <div className="bg-gray-900 p-2 sm:p-4 rounded overflow-x-auto">
         <div className="min-w-[600px]">
           <FraudsterTable />
         </div>
       </div>
-    </div>
+    </Container>
   );
 };
 
