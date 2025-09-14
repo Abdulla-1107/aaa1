@@ -12,7 +12,7 @@ const Home = () => {
   if (error)
     return <Alert message="Xatolik yuz berdi!" type="error" showIcon />;
 
-  console.log(data?.count);
+  console.log(data);
   console.log(myCount, "lj");
 
   return (

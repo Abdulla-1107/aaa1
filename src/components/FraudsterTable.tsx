@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import { Table, Button, Space, Popconfirm, notification } from "antd";
+import {
+  Table,
+  Button,
+  Space,
+  Popconfirm,
+  notification,
+  Tag,
+  Tooltip,
+} from "antd";
 import { GetFraudster } from "../api/service/getFraudster";
 import { useDeleteFraudster } from "../api/service/deleteFraudster";
 
@@ -74,11 +82,27 @@ const FraudstersTable = () => {
       title: "Ism",
       dataIndex: "name",
       key: "name",
-      render: (text: string) => <span className="font-semibold">{text}</span>,
+      render: (text: string) => (
+        <span className="font-semibold text-white">{text}</span>
+      ),
     },
     { title: "Familiya", dataIndex: "surname", key: "surname" },
     { title: "Pasport Code", dataIndex: "passportCode", key: "passportCode" },
-    { title: "Joylashuv", dataIndex: "location", key: "location" },
+    {
+      title: "Joylashuv",
+      dataIndex: "location",
+      key: "location",
+      render: (text: string) => (
+        <Tooltip title={text}>
+          <Tag
+            color="geekblue"
+            className="rounded-lg px-3 py-1 text-sm font-medium"
+          >
+            {text?.length > 15 ? text.slice(0, 15) + "..." : text}
+          </Tag>
+        </Tooltip>
+      ),
+    },
     {
       title: "Amallar",
       key: "actions",
@@ -117,7 +141,7 @@ const FraudstersTable = () => {
     return <p className="text-red-500 text-center mt-10">Xatolik yuz berdi</p>;
 
   return (
-    <div className="p-6 bg-gray-900 rounded-xl shadow-md">
+    <div className="p-6 bg-gray-900 rounded-xl shadow-lg">
       {contextHolder}
       <Table
         rowKey="id"
