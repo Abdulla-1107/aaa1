@@ -7,9 +7,12 @@ import {
   notification,
   Tag,
   Tooltip,
+  Input,
 } from "antd";
 import { GetFraudster } from "../api/service/getFraudster";
 import { useDeleteFraudster } from "../api/service/deleteFraudster";
+
+const { Search } = Input;
 
 const FraudstersTable = () => {
   const { getFraudsters } = GetFraudster();
@@ -17,13 +20,26 @@ const FraudstersTable = () => {
 
   const { mutate: deleteFraudster } = useDeleteFraudster();
 
-  // 🔔 notification hook
   const [api, contextHolder] = notification.useNotification();
-
-  // ✅ faqat bitta qator loading bo‘lsin
   const [deletingId, setDeletingId] = useState<number | null>(null);
 
+  // 🔍 qidiruv state-lar
+  const [searchName, setSearchName] = useState("");
+  const [searchPassport, setSearchPassport] = useState("");
+
   const fraudsters = data?.data || [];
+
+  // 🔍 filter qilingan data
+  const filteredFraudsters = fraudsters.filter((f: any) => {
+    const byName = f.name
+      ?.toLowerCase()
+      .includes(searchName.toLowerCase());
+    const byPassport = f.passportCode
+      ?.toLowerCase()
+      .includes(searchPassport.toLowerCase());
+
+    return byName && byPassport;
+  });
 
   const handleEdit = (record: any) => {
     api.info({
@@ -40,7 +56,7 @@ const FraudstersTable = () => {
   };
 
   const handleDelete = (record: any) => {
-    setDeletingId(record.id); // 🔄 loading faqat shu qator uchun
+    setDeletingId(record.id);
     deleteFraudster(record.id, {
       onSuccess: () => {
         api.success({
@@ -125,7 +141,7 @@ const FraudstersTable = () => {
             <Button
               danger
               size="small"
-              loading={deletingId === record.id} // ✅ faqat shu qator loading
+              loading={deletingId === record.id}
             >
               Delete
             </Button>
@@ -143,10 +159,29 @@ const FraudstersTable = () => {
   return (
     <div className="p-6 bg-gray-900 rounded-xl shadow-lg">
       {contextHolder}
+
+      {/* 🔍 Search inputs */}
+      <div className="mb-4 flex gap-4">
+        <Search
+          placeholder="Ism bo‘yicha qidirish..."
+          allowClear
+          onSearch={(value) => setSearchName(value)}
+          onChange={(e) => setSearchName(e.target.value)}
+          style={{ width: 250 }}
+        />
+        <Search
+          placeholder="Passport Code bo‘yicha qidirish..."
+          allowClear
+          onSearch={(value) => setSearchPassport(value)}
+          onChange={(e) => setSearchPassport(e.target.value)}
+          style={{ width: 250 }}
+        />
+      </div>
+
       <Table
         rowKey="id"
         columns={columns}
-        dataSource={fraudsters}
+        dataSource={filteredFraudsters}
         pagination={{ pageSize: 7, showSizeChanger: false }}
         bordered={false}
         tableLayout="fixed"

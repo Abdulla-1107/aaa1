@@ -9,6 +9,7 @@ import Search from "./pages/Search/Search";
 import User from "./pages/User/User";
 import Fraudster from "./pages/Fraudster/Fraudster";
 import Profile from "./pages/Profile/Profile";
+import Footer from "./components/Footer";
 
 const App: React.FC = () => {
   return (
@@ -38,6 +39,9 @@ const App: React.FC = () => {
                     </Routes>
                   </div>
                 </div>
+
+                {/* Pastda Footer */}
+                <Footer />
               </div>
             </ProtectedRoute>
           }

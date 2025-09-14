@@ -2,6 +2,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../api";
 
+
 export const GetFraudster = () => {
   // 🔹 Barcha firibgarlarni olish
   const getFraudsters = () =>
