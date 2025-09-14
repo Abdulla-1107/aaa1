@@ -10,6 +10,19 @@ html, body {
   color: #ffffff !important;
 }
 
+.ant-card {
+  background-color: #111827 !important; /* bg-gray-900 */
+  border-color: #1f2937 !important;    /* border-gray-800 */
+}
+.ant-card-head {
+  background-color: #111827 !important;
+  color: white !important;
+}
+.ant-card-body {
+  color: white !important;
+}
+
+
 
 .dark-table .ant-table {
   background-color: #1f2937 !important; /* bg-gray-800 */

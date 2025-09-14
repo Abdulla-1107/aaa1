@@ -22,8 +22,6 @@ const Fraudster: React.FC = () => {
   const { createFraudster } = CreateFraudster();
 
   const [form] = Form.useForm();
-
-  // 🔔 notification hook
   const [api, contextHolder] = notification.useNotification();
 
   const handleSubmit = (values: any) => {
@@ -81,14 +79,14 @@ const Fraudster: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      {contextHolder} {/* 🔔 Toast shu yerda chiqadi */}
+    <div style={{ padding: "1rem" }}>
+      {contextHolder}
       <h1
         style={{
           color: "white",
-          fontSize: "28px",
+          fontSize: "24px",
           fontWeight: "bold",
-          marginBottom: "2rem",
+          marginBottom: "1.5rem",
         }}
       >
         Firibgar qo'shish
@@ -105,15 +103,15 @@ const Fraudster: React.FC = () => {
       >
         <Form form={form} layout="vertical" onFinish={handleSubmit}>
           <Row gutter={16}>
-            <Col span={8}>
+            <Col xs={24} md={8}>
               <Form.Item
                 name="firstName"
                 label={<span style={{ color: "white" }}>Ism</span>}
                 rules={[{ required: true, message: "Ism kiriting!" }]}
               >
                 <Input
-                  placeholder="To‘liq ismini kiriting"
                   className="custom-input"
+                  placeholder="To‘liq ismini kiriting"
                   style={{
                     background: "#111827",
                     border: "1px solid #374151",
@@ -123,15 +121,15 @@ const Fraudster: React.FC = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col xs={24} md={8}>
               <Form.Item
                 name="lastName"
                 label={<span style={{ color: "white" }}>Familiya</span>}
                 rules={[{ required: true, message: "Familiya kiriting!" }]}
               >
                 <Input
-                  placeholder="Familiyasini kiriting"
                   className="custom-input"
+                  placeholder="Familiyasini kiriting"
                   style={{
                     background: "#111827",
                     border: "1px solid #374151",
@@ -141,7 +139,7 @@ const Fraudster: React.FC = () => {
                 />
               </Form.Item>
             </Col>
-            <Col span={8}>
+            <Col xs={24} md={8}>
               <Form.Item
                 label={
                   <span style={{ color: "white" }}>
@@ -149,7 +147,7 @@ const Fraudster: React.FC = () => {
                   </span>
                 }
               >
-                <Input.Group compact>
+                <Input.Group compact style={{ display: "flex" }}>
                   <Form.Item
                     name="passportId"
                     noStyle
@@ -157,15 +155,18 @@ const Fraudster: React.FC = () => {
                   >
                     <Select
                       loading={isLoading}
-                      placeholder="Seriyani tanlang"
+                      placeholder="Seriya"
                       style={{
-                        width: "30%",
+                        flex: "0 0 30%",
                         background: "#111827",
                         border: "1px solid #374151",
+                        color: "white",
                         borderRadius: "8px 0 0 8px",
+                      }}
+                      dropdownStyle={{
+                        background: "#1f2937",
                         color: "white",
                       }}
-                      dropdownStyle={{ background: "#1f2937", color: "white" }}
                     >
                       {passports?.map((p: any) => (
                         <Select.Option key={p.id} value={p.id}>
@@ -182,7 +183,7 @@ const Fraudster: React.FC = () => {
                     <Input
                       className="custom-input"
                       style={{
-                        width: "70%",
+                        flex: "1",
                         background: "#111827",
                         border: "1px solid #374151",
                         color: "white",
@@ -202,8 +203,8 @@ const Fraudster: React.FC = () => {
             rules={[{ required: true, message: "Manzil kiriting!" }]}
           >
             <Input
-              placeholder="Manzilni to‘liq kiriting"
               className="custom-input"
+              placeholder="Manzilni to‘liq kiriting"
               style={{
                 background: "#111827",
                 border: "1px solid #374151",
@@ -214,20 +215,17 @@ const Fraudster: React.FC = () => {
           </Form.Item>
 
           <Row gutter={16}>
-            <Col span={12}>
+            <Col xs={24} md={12}>
               <Form.Item
                 name="photo"
-                label={
-                  <span style={{ color: "white" }}>
-                    Firibgar rasmini yuklash
-                  </span>
-                }
+                label={<span style={{ color: "white" }}>Firibgar rasmi</span>}
                 valuePropName="fileList"
                 getValueFromEvent={(e) => (Array.isArray(e) ? e : e?.fileList)}
               >
                 <Upload listType="picture" beforeUpload={() => false}>
                   <Button
                     icon={<UploadOutlined />}
+                    block
                     style={{
                       background: "#111827",
                       border: "1px dashed #374151",
@@ -240,7 +238,8 @@ const Fraudster: React.FC = () => {
                 </Upload>
               </Form.Item>
             </Col>
-            <Col span={12}>
+
+            <Col xs={24} md={12}>
               <Form.Item
                 name="description"
                 label={
@@ -250,7 +249,7 @@ const Fraudster: React.FC = () => {
                 <TextArea
                   className="custom-input"
                   rows={5}
-                  placeholder="Firibgar haqida tegishli ma'lumotlarni kiriting..."
+                  placeholder="Firibgar haqida ma'lumot..."
                   style={{
                     background: "#111827",
                     border: "1px solid #374151",

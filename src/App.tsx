@@ -5,7 +5,6 @@ import Sidebar from "./components/Sidebar";
 import LoginPage from "./pages/Login";
 import Home from "./pages/Home/Home";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Search from "./pages/Search/Search";
 import User from "./pages/User/User";
 import Fraudster from "./pages/Fraudster/Fraudster";
 import Profile from "./pages/Profile/Profile";
@@ -32,7 +31,6 @@ const App: React.FC = () => {
                   <div className="flex-1 p-6 overflow-y-auto">
                     <Routes>
                       <Route path="/" element={<Home />} />
-                      <Route path="/search" element={<Search />} />
                       <Route path="/user" element={<User />} />
                       <Route path="/fraudster" element={<Fraudster />} />
                       <Route path="/profile" element={<Profile />} />

@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { login, LoginData, LoginResponse } from "../api/api";
+import { Form, Input, Button, Typography, Alert, Card } from "antd";
+
+const { Title } = Typography;
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [form] = Form.useForm();
+  const [errorMessage, setErrorMessage] = React.useState("");
 
   const mutation = useMutation<LoginResponse, any, LoginData>({
     mutationFn: login,
@@ -24,44 +26,71 @@ const LoginPage: React.FC = () => {
     },
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage(""); // eski xabarni tozalash
-    console.log("Submitting login...", { username, password });
-    mutation.mutate({ username, password });
+  const handleSubmit = (values: LoginData) => {
+    setErrorMessage("");
+    mutation.mutate(values);
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-950 text-white">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-gray-900 p-8 rounded-lg w-96 flex flex-col gap-4"
+    <div className="flex items-center justify-center h-screen bg-gray-950">
+      <Card
+        style={{ backgroundColor: "#111827", borderColor: "#1f2937" }} // bg-gray-900, border-gray-800
+        className="w-96 shadow-lg"
       >
-        <h1 className="text-2xl font-bold text-center">Login</h1>
-        <input
-          type="text"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="p-2 rounded bg-gray-800 text-white focus:outline-none"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="p-2 rounded bg-gray-800 text-white focus:outline-none"
-        />
-        {errorMessage && (
-          <div className="text-red-500 text-sm">{errorMessage}</div>
-        )}
-        <button
-          type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white p-2 rounded"
-        >
+        <Title level={3} className="text-center text-white">
           Login
-        </button>
-      </form>
+        </Title>
+
+        {errorMessage && (
+          <Alert
+            message={errorMessage}
+            type="error"
+            showIcon
+            className="mb-4"
+          />
+        )}
+
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={handleSubmit}
+          className="text-white"
+        >
+          <Form.Item
+            label={<span className="text-gray-300">Username</span>}
+            name="username"
+            rules={[{ required: true, message: "Iltimos, username kiriting" }]}
+          >
+            <Input
+              placeholder="Username"
+              className="bg-gray-800 text-white placeholder-black border-gray-700"
+            />
+          </Form.Item>
+
+          <Form.Item
+            label={<span className="text-gray-300">Password</span>}
+            name="password"
+            rules={[{ required: true, message: "Iltimos, parol kiriting" }]}
+          >
+            <Input.Password
+              placeholder="Password"
+              className="bg-gray-800 text-white placeholder-white border-gray-700"
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button
+              type="primary"
+              htmlType="submit"
+              loading={mutation.isPending}
+              block
+              className="bg-blue-600"
+            >
+              Login
+            </Button>
+          </Form.Item>
+        </Form>
+      </Card>
     </div>
   );
 };
